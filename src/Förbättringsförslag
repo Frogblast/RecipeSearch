@@ -1,0 +1,15 @@
+Controller
+	• Svårt att "göra fel"
+	• När man stänger ner ett recept så har vi samma sökvärden som innan
+	• Defaultvärdena inkluderar
+		○ alla kök, svårighetsgrader och huvudingredienser.
+		○ en timme satt som maxtid
+		○ Priset satt till 80 kr.
+
+Pliancy
+	• Förbättring
+		○ Vi vill att man ska kunna skriva in pris i spinnern för att inte bara behöva ändra med pilarna.
+		○ När man söker på tex "Vegetarisk" och "Afrika" vill man inte se asiatiska kötträtter även då de hamnar lägre ner i listan.
+
+Feedback
+	• Vi vill kunna se hur maxtiden samt recepten uppdateras när vi drar slidern -> modeless feedback

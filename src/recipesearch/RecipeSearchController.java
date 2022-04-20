@@ -2,7 +2,9 @@
 package recipesearch;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import se.chalmers.ait.dat215.lab2.Recipe;
 import se.chalmers.ait.dat215.lab2.RecipeDatabase;
@@ -46,6 +49,10 @@ public class RecipeSearchController implements Initializable {
     ImageView panelImage;
     @FXML
     Button panelExit;
+    @FXML
+    AnchorPane recipeDetailPane;
+    @FXML
+    SplitPane recipeSearchPane;
 
     ToggleGroup difficultyToggleGroup;
 
@@ -53,11 +60,19 @@ public class RecipeSearchController implements Initializable {
 
     RecipeBackendController recipeBackendController = new RecipeBackendController();
 
+    private Map<String, RecipeListItem> recipeListItemMap = new HashMap<String, RecipeListItem>();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        for (Recipe recipe : recipeBackendController.getRecipes()) {
+            RecipeListItem recipeListItem = new RecipeListItem(recipe, this);
+            recipeListItemMap.put(recipe.getName(), recipeListItem);
+        }
+
         updateRecipeList();
-        mainIngredientComboBox.getItems().addAll("Visa alla", "Apa", "Bepa", "Cepa", "Depa");
+        mainIngredientComboBox.getItems().addAll("Visa alla", "Kött", "Fisk", "Kyckling", "Vegetarisk");
         mainIngredientComboBox.getSelectionModel().select("Visa alla");
         mainIngredientComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -68,12 +83,13 @@ public class RecipeSearchController implements Initializable {
             }
         });
 
-        cuisineComboBox.getItems().addAll("Visa alla", "Apa", "Bepa", "Cepa", "Depa");
+        cuisineComboBox.getItems().addAll("Visa alla", "Frankrike", "Sverige", "Indien", "Asien", "Grekland", "Afrika");
         cuisineComboBox.getSelectionModel().select("Visa alla");
         cuisineComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 recipeBackendController.setCuisine(newValue);
+                updateRecipeList();
             }
         });
 
@@ -98,7 +114,7 @@ public class RecipeSearchController implements Initializable {
 
         int minValue = 10;
         int maxValue = 250;
-        int initialValue = 80;
+        int initialValue = 60;
         int amountToStepBy = 10;
 
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(minValue, maxValue, initialValue, amountToStepBy);
@@ -138,6 +154,7 @@ public class RecipeSearchController implements Initializable {
                     String displayTime = String.valueOf(newTime);
                     recipeBackendController.setMaxTime(newTime);
                     minutesLabel.setText(displayTime);
+                    updateRecipeList();
                 }
             }
         });
@@ -145,11 +162,21 @@ public class RecipeSearchController implements Initializable {
 
     }
 
+    @FXML
+    public void closeRecipeView(){
+        recipeSearchPane.toFront();
+    }
+
+    public void openRecipeView(Recipe recipe){
+        populateRecipeDetailView(recipe);
+        recipeDetailPane.toFront();
+    }
+
     private void updateRecipeList() {
         recipeListFlowPane.getChildren().clear();
         List<Recipe> recipeList = recipeBackendController.getRecipes();
         for (Recipe recipe : recipeList) {
-            recipeListFlowPane.getChildren().add(new RecipeListItem(recipe, this));
+            recipeListFlowPane.getChildren().add(recipeListItemMap.get(recipe.getName()));
         }
 
     }
