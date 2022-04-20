@@ -1,2 +1,26 @@
+.text-normal{
+     -fx-font-size: 15px;
+     -fx-font-family: "Gabriola";
+ }
 
+.text-larger{
+	-fx-font-size: 18px;
+	-fx-font-family: "Gabriola";
+}
 
+.text-smaller{
+     -fx-font-size: 13px;
+     -fx-font-family: "Gabriola";
+}
+
+.logo{
+     -fx-font-size: 48px;
+     -fx-font-family: "Segou UI";
+}
+
+.logo-twirl{
+      -fx-font-size: 64px;
+      -fx-font-family: "Corbel";
+      -fx-rotate: -20;
+	-fx-text-fill: #FFAC33;
+}
