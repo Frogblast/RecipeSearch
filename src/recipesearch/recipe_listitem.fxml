@@ -5,13 +5,30 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root onMouseClicked="#onClick" prefHeight="100.0" prefWidth="495.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root onMouseClicked="#onClick" prefHeight="152.0" prefWidth="538.0" styleClass="recipe-list-item" stylesheets="@recipe_search.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="recipeName" layoutX="248.0" layoutY="67.0" text="Stekt Ägg" />
-      <ImageView fx:id="recipeImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="recipeName" layoutX="237.0" layoutY="14.0" prefHeight="35.0" prefWidth="240.0" styleClass="text-larger" text="Stekt Ägg" />
+      <ImageView fx:id="recipeImage" fitHeight="140.0" fitWidth="140.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="5.0">
          <image>
             <Image url="@resources/logo.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="cuisineImage" fitHeight="52.0" fitWidth="52.0" layoutX="124.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_flag_france.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mainIngredientImage" fitHeight="16.0" fitWidth="20.0" layoutX="235.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_main_chicken.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="difficultyImage" fitHeight="16.0" fitWidth="65.0" layoutX="265.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_difficulty_easy.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timeLabel" layoutX="328.0" layoutY="53.0" prefHeight="35.0" prefWidth="62.0" text="xx Minuter" />
+      <Label fx:id="priceLabel" layoutX="402.0" layoutY="53.0" prefHeight="35.0" prefWidth="62.0" text="xx Kr" />
    </children>
 </fx:root>
